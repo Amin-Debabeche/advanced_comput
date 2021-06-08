@@ -85,7 +85,9 @@ int main(void)
           // start modification question 4
           // Heat capacity. You can use variables EnergySum, EnergyCount,
           // and EnergySquaredSum.
-
+          EnergySquaredSum += SQR(RunningEnergy);
+          EnergySum += RunningEnergy;
+          EnergyCount += 1.0 ;
           // end modification
 
           // calculate the chemical potential
