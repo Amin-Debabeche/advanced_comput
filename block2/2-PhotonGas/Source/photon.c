@@ -41,7 +41,11 @@ int main(void)
     for(j=0;j<CycleMultiplication;j++)
     {
       // start modification
-
+        if (RandomNumber()<0.5)
+            New =Old+((int)(RandomNumber()*5));
+        else
+            New=Old-((int)(RandomNumber()*5));
+        if (New<0) New=0;
       // end   modification
 
       // accept or reject

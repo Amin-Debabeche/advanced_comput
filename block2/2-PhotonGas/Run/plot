@@ -16,6 +16,5 @@ set yrange [0:2]
 
 # plot result
 plot \
- f(x) w l t 'Theory', \
- 'result.dat' u 1:2 w p lt 3 ps 2 pt 6 t 'Simulation'
+ f(x) w l t 'Theory', 'result.dat' u 1:2 w p lt 3 ps 2 pt 6 t 'Simulation'
 pause -1

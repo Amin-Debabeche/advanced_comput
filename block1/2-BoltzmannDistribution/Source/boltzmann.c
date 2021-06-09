@@ -40,7 +40,8 @@ int main(void)
      tmp=exp(-Beta*i);
 
      // start modification
-
+    //tmp=(i+1)exp(-Beta*i); //2nd
+    //tmp=(2*i+1)exp(-Beta*(0.5*i*(i+1))); //3rd
      // end modification
 
      Distribution[i]=tmp;

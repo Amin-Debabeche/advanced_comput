@@ -55,10 +55,12 @@ void SampleDiff(int Switch)
         // Frenkel/Smit. in this Way, you will have to think more... 
 
         // start modification
-
           t0index=t0Counter%MAXT0;
           t0Counter++;
           t0time[t0index]=time;
+
+          // store particle positions/velocities
+          // question: why should we use PositionsNONPDB instead of positions ?????
 
           for(i=0;i<NumberOfParticles;i++)
           {
@@ -76,22 +78,24 @@ void SampleDiff(int Switch)
       // loop over all time origins that have been stored
 
       // start modification
-        for(j=0;j<MIN(t0Counter,MAXT0);j++)
-        {
-          CorrelTime=time-t0time[j];
-          if(CorrelTime<MAXT)
-          {
-            for(i=0;i<NumberOfParticles;i++)
-            {
-              Vacf[CorrelTime]+=Velocities[i].x*Vxt0[i][j]+
-                                Velocities[i].y*Vyt0[i][j]+
-                                Velocities[i].z*Vzt0[i][j];
-              R2[CorrelTime]+=SQR(PositionsNONPDB[i].x-Rx0[i][j])+
-                              SQR(PositionsNONPDB[i].y-Ry0[i][j])+
-                              SQR(PositionsNONPDB[i].z-Rz0[i][j]);
-            }
-          }
-        }
+         for(j=0;j<MIN(t0Counter,MAXT0);j++)
+         {
+           CorrelTime=time-t0time[j];
+
+           // only if the time difference is shorter than the maximum correlation time
+           if(CorrelTime<MAXT)
+           {
+             SampleCounter[CorrelTime]++;
+
+             for(i=0;i<NumberOfParticles;i++)
+             {
+               Vacf[CorrelTime]+=Velocities[i].x*Vxt0[i][j]+Velocities[i].y*Vyt0[i][j]+Velocities[i].z*Vzt0[i][j];
+               R2[CorrelTime]+=SQR(PositionsNONPDB[i].x-Rx0[i][j])+
+                        SQR(PositionsNONPDB[i].y-Ry0[i][j])+
+                        SQR(PositionsNONPDB[i].z-Rz0[i][j]);
+             }
+           }
+         }
       // end modification
       break;
     case WRITE_RESULTS:
